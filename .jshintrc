@@ -27,6 +27,8 @@
         "prompt": false,
         "console": false,
         "require": false,
-        "_": false
+        "_": false,
+        "phaser": false,
+        "Phaser": false
     }
 }
