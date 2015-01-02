@@ -1,11 +1,14 @@
 import {Ball} from './ball.js';
+import {Tray} from './tray.js';
 
 var ball,
+	tray,
 	bmd,
 	game = new Phaser.Game(800, 600, Phaser.CANVAS, 'container', { preload, create, update, render });
 
 function preload() {
 	Ball.preload(game);
+	Tray.preload(game);
 }
 
 function create() {
@@ -22,6 +25,7 @@ function create() {
 	game.physics.p2.restitution = 0.8;
 
 	ball = new Ball(game);
+	tray = new Tray(game);
 
 	game.input.onDown.add(launch, this);
 }
@@ -39,6 +43,8 @@ function launch() {
 function update() {
 	bmd.context.fillStyle = '#ffff00';
 	bmd.context.fillRect(ball.x, ball.y, 2, 2);
+
+	game.physics.arcade.collide(tray, ball);
 }
 
 function render() {
