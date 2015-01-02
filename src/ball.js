@@ -3,9 +3,10 @@ export class Ball extends Phaser.Sprite{
 		super(game, game.world.centerX, game.world.centerY, 'ball');
 
 		game.add.existing(this);
-		game.physics.p2.enable(this);
 		this.scale.set(0.2);
+		game.physics.p2.enable(this);
 		this.body.fixedRotation = true;
+		this.body.setCircle(20);
 	}
 }
 

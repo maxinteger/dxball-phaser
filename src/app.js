@@ -42,4 +42,6 @@ function update() {
 }
 
 function render() {
+	game.debug.spriteBounds(ball, 'red', false);
+	game.debug.body(ball, 'blue', true);
 }
