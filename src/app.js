@@ -1,53 +1,40 @@
+import {blockPreload, blockManager} from './block.js';
 import {Ball} from './ball.js';
 import {Tray} from './tray.js';
 
-var ball,
+var game = new Phaser.Game(800, 600, Phaser.CANVAS, 'container', { preload, create, update }),
+	BM,
+	ball,
 	tray,
-	bmd,
-	game = new Phaser.Game(800, 600, Phaser.CANVAS, 'container', { preload, create, update, render });
+	block,
+	bmd;
 
 function preload() {
 	Ball.preload(game);
 	Tray.preload(game);
+	blockPreload(game);
 }
 
 function create() {
-	game.physics.startSystem(Phaser.Physics.P2JS);
+	game.physics.startSystem(Phaser.Physics.ARCADE);
 
-	game.stage.backgroundColor = '#124184';
+	game.stage.backgroundColor = '#000000';
 
 	bmd = game.add.bitmapData(800, 600);
 	bmd.context.fillStyle = '#ffffff';
-
 	game.add.sprite(0, 0, bmd);
-
-	game.physics.p2.gravity.y = 100;
-	game.physics.p2.restitution = 0.8;
 
 	ball = new Ball(game);
 	tray = new Tray(game);
+	BM = blockManager(game, [ball]);
 
-	game.input.onDown.add(launch, this);
-}
-
-function launch() {
-	if (game.input.x < ball.x){
-		ball.body.velocity.x = -200;
-		ball.body.velocity.y = -200;
-	} else {
-		ball.body.velocity.x = 200;
-		ball.body.velocity.y = -200;
-	}
+	BM.createRandom();
 }
 
 function update() {
 	bmd.context.fillStyle = '#ffff00';
-	bmd.context.fillRect(ball.x, ball.y, 2, 2);
+	bmd.context.fillRect(ball.x, ball.y, 1,1);
 
 	game.physics.arcade.collide(tray, ball);
-}
-
-function render() {
-	game.debug.spriteBounds(ball, 'red', false);
-	game.debug.body(ball, 'blue', true);
+	BM.update();
 }
