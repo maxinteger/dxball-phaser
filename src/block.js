@@ -14,7 +14,6 @@ class Block extends Phaser.Sprite{
 		this.anchor.setTo(0.5, 0.5);
 
 		game.physics.enable(this, Phaser.Physics.ARCADE);
-		this.body.collideWorldBounds = true;
 		this.body.immovable = true;
 
 		game.add.existing(this);

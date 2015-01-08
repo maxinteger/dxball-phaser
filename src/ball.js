@@ -1,6 +1,6 @@
 export class Ball extends Phaser.Sprite{
 	constructor (game){
-		super(game, game.world.centerX, game.world.centerY, 'ball');
+		super(game, game.world.centerX, game.world.height - 40, 'ball');
 		this.game = game;
 		this.scale.set(0.2);
 		this.anchor.setTo(0.5, 0.5);
@@ -9,9 +9,11 @@ export class Ball extends Phaser.Sprite{
 		this.body.collideWorldBounds = true;
 		this.body.bounce.set(1);
 		this.body.fixedRotation = true;
-		this.body.velocity.y = -200;
-
 		game.add.existing(this);
+	}
+
+	start(){
+		this.body.velocity.y = -200;
 	}
 }
 

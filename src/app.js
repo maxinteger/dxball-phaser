@@ -25,7 +25,7 @@ function create() {
 	game.add.sprite(0, 0, bmd);
 
 	ball = new Ball(game);
-	tray = new Tray(game);
+	tray = new Tray(game, [ball]);
 	BM = blockManager(game, [ball]);
 
 	BM.createRandom();
